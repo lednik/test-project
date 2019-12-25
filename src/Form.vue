@@ -37,23 +37,55 @@
           />
         </div>
       </div>
+      <div class="form__raw">
+        <div class="form__section section">
+          <label class="further-text" for="birth">Date of birth</label>
+          <date-picker
+            @input="updateBirthDay()"
+            name="birth"
+            v-model="date"
+            valuetype="token(DD/MM/YYYY)"
+            lang="en"
+          ></date-picker>
+        </div>
+        <div class="form__section section">
+          <label for="zipCode" class="further-text">Zip code</label>
+          <input
+            type="text"
+            name="zipCode"
+            class="input input_short"
+            @input="updateZipCode($event)"
+            required
+          />
+        </div>
+      </div>
       <button class="form__button button">SING UP</button>
     </form>
   </div>
 </template>
 
 <script>
+import DatePicker from "vue2-datepicker";
+import "vue2-datepicker/index.css";
+
 export default {
-  /* data() {
+  data() {
     return {
+      date: ""
     };
-  }, */
+  },
+  components: {
+    DatePicker
+  },
   computed: {
     getLogin() {
       return this.$store.state.login;
     }
   },
   methods: {
+    updateBirthDay() {
+      this.$store.state.birthDay = this.date;
+    },
     updateLogin(event) {
       this.$store.state.login = event.target.value;
     },
@@ -68,17 +100,15 @@ export default {
     },
     updateLastName(event) {
       this.$store.state.lastName = event.target.value;
+    },
+    updateZipCode(event) {
+      this.$store.state.zipCode = event.target.value;
     }
   }
 };
 </script>
 
 <style scoped>
-@font-face {
-  font-family: "Roboto";
-  src: url("/src/fonts/Roboto-Regular.ttf") format("ttf");
-}
-
 .form {
   max-width: 600px;
   padding: 50px 10px 87px 10px;

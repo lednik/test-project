@@ -14,11 +14,20 @@ export default {
   components: {
     appForm: Form,
     appInfo: UserInfo
+  },
+  data() {
+    return {
+      date: ""
+    };
   }
 };
 </script>
 
 <style>
+@font-face {
+  font-family: "Roboto";
+  src: url("/src/fonts/Roboto-Regular.ttf") format("ttf");
+}
 .app__item {
   margin: 43px auto 43px auto;
 }
@@ -26,7 +35,7 @@ body {
   background-color: #f0f0f0;
 }
 .title {
-  font-family: Roboto;
+  font-family: "Roboto";
   font-weight: bold;
   font-size: 30px;
   color: #333333;
@@ -64,5 +73,9 @@ body {
 .section {
   display: flex;
   flex-direction: column;
+}
+.mx-input {
+  height: 64px;
+  width: 228px;
 }
 </style>

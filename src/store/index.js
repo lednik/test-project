@@ -9,6 +9,8 @@ export default new Vuex.Store({
         email: '',
         password: '',
         firstName: '',
-        lastName: ''
+        lastName: '',
+        zipCode: '',
+        birthDay: ''
     }
 })
