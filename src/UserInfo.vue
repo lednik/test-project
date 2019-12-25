@@ -5,7 +5,7 @@
       {{getFirstName}} {{getLastName}} /
       <span class="further-text text">{{getLogin}}</span>
     </p>
-    <p class="text main-text user-info__p">{{getEmail}}{{getBirthDay}}</p>
+    <p class="text main-text user-info__p">{{getEmail}}</p>
   </div>
 </template>
 
@@ -16,9 +16,6 @@ export default {
     };
   }, */
   computed: {
-    getBirthDay() {
-      return this.$store.state.birthDay;
-    },
     getLogin() {
       return this.$store.state.login;
     },

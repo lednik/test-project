@@ -26,7 +26,9 @@ export default {
 <style>
 @font-face {
   font-family: "Roboto";
-  src: url("/src/fonts/Roboto-Regular.ttf") format("ttf");
+  src: url("/src/fonts/Roboto-Regular.ttf") format("font-truetype"),
+    url("/src/fonts/roboto-regular.woff2") format("woff2"),
+    url("/src/fonts/roboto-regular.woff") format("woff");
 }
 .app__item {
   margin: 43px auto 43px auto;
@@ -58,6 +60,7 @@ body {
   border-radius: 4px;
   padding-left: 23px;
   color: #333333;
+  background-color: white;
 }
 .button {
   width: 292px;

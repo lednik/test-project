@@ -1,20 +1,23 @@
 <template>
   <div>
     <form class="form app__item" method="post" name="newUser">
-      <!-- <p>{{getLogin}}</p> -->
       <p class="form__title title">Sing up</p>
+
       <div class="form__section section">
         <label for="lol" class="further-text">Login</label>
         <input type="text" name="lol" class="input" @input="updateLogin($event)" required />
       </div>
+
       <div class="form__section section">
         <label for="email" class="further-text">E-mail</label>
         <input type="email" name="email" class="input" @input="updateEmail($event)" required />
       </div>
+
       <div class="form__section section">
         <label for="password" class="further-text">Password</label>
         <input type="password" class="input" @input="updatePassword($event)" />
       </div>
+
       <div class="form__raw">
         <div class="form__section section">
           <label for="firstName" class="further-text">First name</label>
@@ -37,6 +40,35 @@
           />
         </div>
       </div>
+
+      <div class="form__raw">
+        <div class="form__section section">
+          <label class="further-text" for="country">Country</label>
+          <select
+            v-model="country"
+            @change="setCountry(country)"
+            name="country"
+            class="input_short input text main-text"
+          >
+            <option value selected disabled>Select</option>
+            <option v-for="value in getCountries">{{value}}</option>
+          </select>
+        </div>
+        <div class="form__section section">
+          <label for="city" class="further-text">City</label>
+          <select
+            @change="setCity(city)"
+            v-model="city"
+            name="city"
+            id="city"
+            class="input_short input text main-text"
+          >
+            <option value selected disabled>Select</option>
+            <option v-for="value in getCities" :selected="city">{{value}}</option>
+          </select>
+        </div>
+      </div>
+
       <div class="form__raw">
         <div class="form__section section">
           <label class="further-text" for="birth">Date of birth</label>
@@ -44,7 +76,7 @@
             @input="updateBirthDay()"
             name="birth"
             v-model="date"
-            valuetype="token(DD/MM/YYYY)"
+            value-type="DD-MM-YYYY"
             lang="en"
           ></date-picker>
         </div>
@@ -59,6 +91,7 @@
           />
         </div>
       </div>
+
       <button class="form__button button">SING UP</button>
     </form>
   </div>
@@ -71,18 +104,32 @@ import "vue2-datepicker/index.css";
 export default {
   data() {
     return {
-      date: ""
+      date: "",
+      country: "",
+      city: ""
     };
   },
   components: {
     DatePicker
   },
   computed: {
-    getLogin() {
-      return this.$store.state.login;
+    getCountries() {
+      return this.$store.state.countries;
+    },
+    getCities() {
+      return this.$store.state.cities[this.$store.state.country];
+    },
+    getCountry() {
+      return this.$store.state.country;
     }
   },
   methods: {
+    setCountry(country) {
+      this.$store.commit("changeCountry", country);
+    },
+    setCity(city) {
+      this.$store.commit("changeCity", city);
+    },
     updateBirthDay() {
       this.$store.state.birthDay = this.date;
     },

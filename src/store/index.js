@@ -11,6 +11,26 @@ export default new Vuex.Store({
         firstName: '',
         lastName: '',
         zipCode: '',
-        birthDay: ''
+        birthDay: '',
+        country: '',
+        city: '',
+        countries: [
+            'Russia',
+            'Italy'
+        ],
+        country: '',
+        cities: {
+            Russia: ['Moscow', 'Tomsk', 'Novosibirsk', 'Kazan', 'Omsk', 'St. Petersburg', 'Novorossiysk'],
+            Italy: ['Rome', 'Milan', 'Naples', 'Venice', '	Florence', 'Palermo', 'Genoa']
+        }
+    },
+    mutations: {
+        changeCountry(state, payload) {
+            state.country = payload
+        },
+        changeCity(state, payload) {
+            state.city = payload
+        }
     }
-})
+}
+)
