@@ -4,12 +4,18 @@
       <p class="form__title title">Sing up</p>
 
       <div class="form__section section">
-        <label for="lol" class="further-text">Login</label>
+        <label for="lol" class="further-text">
+          Login
+          <span class="form__required">*</span>
+        </label>
         <input type="text" name="lol" class="input" @input="updateLogin($event)" required />
       </div>
 
       <div class="form__section section">
-        <label for="email" class="further-text">E-mail</label>
+        <label for="email" class="further-text">
+          E-mail
+          <span class="form__required">*</span>
+        </label>
         <input type="email" name="email" class="input" @input="updateEmail($event)" required />
       </div>
 
@@ -26,7 +32,6 @@
             name="firstName"
             class="input input_short"
             @input="updateFirstName($event)"
-            required
           />
         </div>
         <div class="form__section section">
@@ -36,7 +41,6 @@
             name="lasttName"
             class="input input_short"
             @input="updateLastName($event)"
-            required
           />
         </div>
       </div>
@@ -48,10 +52,11 @@
             v-model="country"
             @change="setCountry(country)"
             name="country"
-            class="input_short input text main-text"
+            class="input_short input text main-text form__select"
+            :class="{'form__select_activeSelect':isActiveCountrySelect}"
           >
-            <option value selected disabled>Select</option>
-            <option v-for="value in getCountries">{{value}}</option>
+            <option value selected disabled hidden class="disabled-option">Select</option>
+            <option v-for="value in getCountries">{{ value }}</option>
           </select>
         </div>
         <div class="form__section section">
@@ -61,10 +66,15 @@
             v-model="city"
             name="city"
             id="city"
-            class="input_short input text main-text"
+            class="input_short input text main-text form__select"
+            :class="{'form__select_activeSelect':isActiveCitySelect}"
           >
-            <option value selected disabled>Select</option>
-            <option v-for="value in getCities" :selected="city">{{value}}</option>
+            <option value selected hidden disabled>Select</option>
+            <option v-for="value in getCities" :selected="city">
+              {{
+              value
+              }}
+            </option>
           </select>
         </div>
       </div>
@@ -87,12 +97,15 @@
             name="zipCode"
             class="input input_short"
             @input="updateZipCode($event)"
-            required
           />
         </div>
       </div>
 
-      <button class="form__button button">SING UP</button>
+      <button
+        @click="checkRequired()"
+        class="form__button button"
+        :class="{'button_active':isRequiredDone}"
+      >SING UP</button>
     </form>
   </div>
 </template>
@@ -106,7 +119,11 @@ export default {
     return {
       date: "",
       country: "",
-      city: ""
+      city: "",
+      isAvtiveBtn: false,
+      isActiveCountrySelect: false,
+      isActiveCitySelect: false,
+      isRequiredDone: false
     };
   },
   components: {
@@ -126,18 +143,22 @@ export default {
   methods: {
     setCountry(country) {
       this.$store.commit("changeCountry", country);
+      this.isActiveCountrySelect = true;
     },
     setCity(city) {
       this.$store.commit("changeCity", city);
+      this.isActiveCitySelect = true;
     },
     updateBirthDay() {
       this.$store.state.birthDay = this.date;
     },
     updateLogin(event) {
       this.$store.state.login = event.target.value;
+      this.checkREquiredDone();
     },
     updateEmail(event) {
       this.$store.state.email = event.target.value;
+      this.checkREquiredDone();
     },
     updatePassword(event) {
       this.$store.state.password = event.target.value;
@@ -150,12 +171,24 @@ export default {
     },
     updateZipCode(event) {
       this.$store.state.zipCode = event.target.value;
+    },
+    checkREquiredDone() {
+      if (this.$store.state.login !== "" && this.$store.state.email !== "") {
+        this.isRequiredDone = true;
+      }
+    },
+    checkRequired() {
+      if (this.isRequiredDone) {
+        alert("Регистрация завершена");
+      } else {
+        alert("Заполните все обязательные поля");
+      }
     }
   }
 };
 </script>
 
-<style scoped>
+<style>
 .form {
   max-width: 600px;
   padding: 50px 10px 87px 10px;
@@ -164,6 +197,24 @@ export default {
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 10px;
+}
+.form__select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  color: #c1c1c1;
+  background: url("/src/assets/img/arrow.svg") 100% 50% no-repeat;
+}
+.form__select option {
+  color: #333333;
+}
+
+.form__select_activeSelect {
+  color: #333333 !important;
+  background: url("/src/assets/img/active-arrow.svg") 100% 50% no-repeat;
+}
+.form__required {
+  color: #e90000;
 }
 .form__section {
   padding-bottom: 25px;
@@ -179,5 +230,8 @@ export default {
 
 .input_short {
   width: 228px;
+}
+.disabled-option {
+  color: #c1c1c1;
 }
 </style>

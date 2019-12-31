@@ -60,7 +60,13 @@ body {
   border-radius: 4px;
   padding-left: 23px;
   color: #333333;
-  background-color: white;
+  background-color: white !important;
+}
+.input:focus {
+  border: 1px solid #0056d8 !important;
+}
+.input:hover {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .button {
   width: 292px;
@@ -72,6 +78,18 @@ body {
   border-radius: 0px 20px;
   background: #c4c4c4;
   border: 0;
+  margin-bottom: 8px;
+}
+.button_active {
+  background: #0056d8;
+}
+.button_active:hover {
+  background: #003585;
+}
+.button:hover {
+  width: 324px;
+  height: 64px;
+  margin-bottom: 0px;
 }
 .section {
   display: flex;
@@ -80,5 +98,11 @@ body {
 .mx-input {
   height: 64px;
   width: 228px;
+}
+.mx-input:focus {
+  border: 1px solid #0056d8 !important;
+}
+.mx-input:hover {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 </style>

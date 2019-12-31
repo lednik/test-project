@@ -31,7 +31,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style>
 .user-info {
   max-width: 600px;
   padding: 40px 10px 40px 10px;
