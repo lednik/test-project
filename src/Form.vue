@@ -223,6 +223,7 @@ export default {
   display: flex;
   width: 480px;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .form__button {
   margin-top: 47px;
@@ -233,5 +234,11 @@ export default {
 }
 .disabled-option {
   color: #c1c1c1;
+}
+@media screen and (max-width: 585px) {
+  .form__raw {
+    width: 230px;
+    justify-content: space-around;
+  }
 }
 </style>

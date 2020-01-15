@@ -103,6 +103,12 @@ body {
   border: 1px solid #0056d8 !important;
 }
 .mx-input:hover {
+  border: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+@media screen and (max-width: 585px) {
+  .input {
+    width: 228px;
+  }
 }
 </style>
